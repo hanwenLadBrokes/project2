@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { AuthenticateService } from '../service/authentication.service';
+import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -7,9 +11,59 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterPage implements OnInit {
 
-  constructor() { }
 
-  ngOnInit() {
+  validations_form: FormGroup;
+  errorMessage: string = '';
+  successMessage: string = '';
+
+  validation_messages = {
+   'email': [
+     { type: 'required', message: 'Student Email is required.' },
+     { type: 'pattern', message: 'Enter a valid student email.' }
+   ],
+   'password': [
+     { type: 'required', message: 'Password is required.' },
+     { type: 'minlength', message: 'Password must be at least 5 characters long.' }
+   ]
+ };
+
+  constructor(
+    private navCtrl: NavController,
+    private authService: AuthenticateService,
+    public router: Router,
+    private formBuilder: FormBuilder
+  ) {}
+
+  ngOnInit(){
+    this.validations_form = this.formBuilder.group({
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.edu+.[a-zA-Z0-9-]+$')
+      ])),
+      password: new FormControl('', Validators.compose([
+        Validators.minLength(5),
+        Validators.required
+      ])),
+    });
   }
+
+  tryRegister(value){
+    this.authService.registerUser(value)
+     .then(res => {
+       console.log(res);
+       this.errorMessage = "";
+       this.router.navigateByUrl('add-profile');
+     }, err => {
+       console.log(err);
+       this.errorMessage = err.message;
+       this.successMessage = "";
+     })
+  }
+
+
+  goLoginPage(){
+    this.navCtrl.navigateBack('');
+  }
+
 
 }
