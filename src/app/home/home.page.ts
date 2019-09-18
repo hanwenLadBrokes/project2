@@ -25,9 +25,9 @@ export class HomePage {
     this.router.navigateByUrl("profile")
   }
 
-  // gotoFlatmatepreference(){
-  //   this.router.navigateByUrl("flatmate-preference")
-  // }
+  gotoFlatmatepreference(){
+    this.router.navigateByUrl("flatmate-preference")
+  }
   logout(){
     this.authService.logoutUser()
     .then(res => {

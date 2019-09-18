@@ -17,16 +17,7 @@
     </ul>
   </div>
 
-  <div *ngIf="items?.length > 0 else noinfos">
-    <h1>Your flatmate preference</h1>
-    <ul *ngFor = "let item of items">
-      <div class="row">
-          Age: <input [(ngModel)]="item.age" name="age"><br>
-          Gender: <input [(ngModel)]="item.gender" name="gender"><br>
-          Habit: <input [(ngModel)]="item.habit" name="habit">
-      </div>
-    </ul>
-  </div>
+  
     
     
     

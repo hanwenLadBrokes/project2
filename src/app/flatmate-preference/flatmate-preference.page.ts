@@ -4,6 +4,7 @@ import { DatabaseService } from '../service/database.service';
 import { NavController } from '@ionic/angular';
 import { AuthenticateService } from '../service/authentication.service';
 import { Router } from '@angular/router';
+import { Item } from '../models/item';
 
 @Component({
   selector: 'app-flatmate-preference',
@@ -14,6 +15,7 @@ export class FlatmatePreferencePage implements OnInit {
   validations_form: FormGroup;
   errorMessage: string = '';
   successMessage: string = '';
+  items: Item[];
 
   validation_messages = {
     'age': [
@@ -40,6 +42,9 @@ export class FlatmatePreferencePage implements OnInit {
 
   ngOnInit() {
     this.resetFields();
+    this.dataService.show_flatmates().subscribe(items =>{
+      this.items = items;
+    });
   }
   resetFields(){
     this.validations_form = this.formBuilder.group({
@@ -65,9 +70,18 @@ export class FlatmatePreferencePage implements OnInit {
     }
     this.dataService.get_flatmte_preference(data)
      .then(res => {
-      this.router.navigateByUrl('home');
+      this.router.navigateByUrl('flatmate-preference');
      })
   }
+
+  update(){
+
+  }
+
+  BacktoHome(){
+    this.router.navigateByUrl('home');
+  }
+  
   logout(){
     this.authService.logoutUser()
     .then(res => {

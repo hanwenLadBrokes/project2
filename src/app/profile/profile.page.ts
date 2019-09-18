@@ -14,7 +14,7 @@ import { Item } from '../models/item';
 export class ProfilePage implements OnInit {
 
   infos: Info[];
-  items: Item[];
+  
 
   constructor(
     private navCtrl: NavController,
@@ -29,9 +29,7 @@ export class ProfilePage implements OnInit {
     this.dataservice.show_details().subscribe(infos =>{
       this.infos = infos;
     });
-    this.dataservice.show_flatmates().subscribe(items =>{
-      this.items = items;
-    });
+    
   }
 
 

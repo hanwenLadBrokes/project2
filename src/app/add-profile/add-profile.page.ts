@@ -74,7 +74,7 @@ export class AddProfilePage implements OnInit {
     }
     this.dataService.get_user_details(data)
      .then(res => {
-      this.router.navigateByUrl('flatmate-preference');
+      this.router.navigateByUrl('home');
      })
   }
   logout(){
