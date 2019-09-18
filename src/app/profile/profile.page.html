@@ -4,6 +4,37 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <div *ngIf="infos?.length > 0 else noinfos">
+    <h1>Your information</h1>
+    <ul *ngFor = "let info of infos">
+      <div class="row">
+          Name: <input [(ngModel)]="info.name" name="name"><br>
+          Age: <input [(ngModel)]="info.age" name="age"><br>
+          Gender: <input [(ngModel)]="info.gender" name="gender"><br>
+          Habit: <input [(ngModel)]="info.habit" name="habit">
+      </div>
+    </ul>
+  </div>
+
+  <div *ngIf="items?.length > 0 else noinfos">
+    <h1>Your flatmate preference</h1>
+    <ul *ngFor = "let item of items">
+      <div class="row">
+          Age: <input [(ngModel)]="item.age" name="age"><br>
+          Gender: <input [(ngModel)]="item.gender" name="gender"><br>
+          Habit: <input [(ngModel)]="item.habit" name="habit">
+      </div>
+    </ul>
+  </div>
+    
+    
+    
+    <ng-template #noinfos>
+      <h5>Waiting...</h5>
+    </ng-template>
+    <ion-button (click)="update()">Update</ion-button>  
+    <ion-button (click)="BacktoHome()">Back</ion-button>
+    <ion-button (click)="logout()">Logout</ion-button>
 
 </ion-content>
