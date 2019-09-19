@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { IonItemDivider } from '@ionic/angular';
 import { Item } from '../models/item';
 import {map} from 'rxjs/operators'
-
+import { resolve, reject } from 'q';
  
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,29 @@ export class DatabaseService {
     let currentUser = firebase.auth().currentUser;
     this.Profile_detail = firestore.collection('user').doc(currentUser.uid).collection('details');
   }
+
+  addUserProfile( info:Info ){
+
+    return new Promise<any>((resolve, reject) => {
+
+      this.firestore.collection('user').add(info)
+      .then(
+        res => resolve(res),
+        err => reject(err)
+      )
+    })
+  }
+
+  async getUserCollection(){
+
+    let userRef = this.firestore.collection('user');
+    let allCities = await userRef.get();
+    let a = 1;
+  }
+
+
+
+
   get_user_details(info:Info)
   {
     return new Promise<any>((resolve, reject) => {

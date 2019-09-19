@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthenticateService } from '../service/authentication.service';
+import { DatabaseService } from '../service/database.service';
 
 
 @Component({
@@ -17,11 +18,12 @@ export class RecommendationPage implements OnInit {
 
   constructor(private navCtrl: NavController,
     public router: Router,
-    private authService: AuthenticateService) {}
+    private authService: AuthenticateService,
+    private databaseService:DatabaseService ) {}
 
   ngOnInit(){
     
-
+    this.databaseService.getUserCollection();
 
     var xiaohong:any = new Object();
     xiaohong.name = "xiaohong";
