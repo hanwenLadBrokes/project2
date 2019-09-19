@@ -43,7 +43,7 @@ export class DatabaseService {
   }
 
   getUserCollection(){
-    return this.profileDetails;
+    return await this.profileDetails;
   }
 
 
