@@ -16,6 +16,7 @@ export class FlatmatePreferencePage implements OnInit {
   errorMessage: string = '';
   successMessage: string = '';
   items: Item[];
+  idealMate : any;
 
   validation_messages = {
     'age': [
@@ -45,6 +46,12 @@ export class FlatmatePreferencePage implements OnInit {
     this.dataService.show_flatmates().subscribe(items =>{
       this.items = items;
     });
+
+    this.idealMate = new Object();
+
+    this.idealMate.age = 30;
+    this.idealMate.gender = "Male";
+    this.idealMate.habit = "Swimming";
   }
   resetFields(){
     this.validations_form = this.formBuilder.group({
@@ -75,9 +82,12 @@ export class FlatmatePreferencePage implements OnInit {
   }
 
   update(){
-
+    localStorage.setItem("idealMate",this.idealMate);
+    localStorage.setItem("idealAge",this.idealMate.age);
+    localStorage.setItem("idealGender",this.idealMate.gender);
+    localStorage.setItem("idealHabit",this.idealMate.habit);
   }
-
+  
   BacktoHome(){
     this.router.navigateByUrl('home');
   }

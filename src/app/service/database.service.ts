@@ -37,15 +37,20 @@ export class DatabaseService {
   }
   get_user_details(info:Info)
   {
+    // return new Promise<any>((resolve, reject) => {
+    //   let currentUser = firebase.auth().currentUser;
+    //   this.firestore.collection('user').doc(currentUser.uid).collection('details').doc(currentUser.uid).set(info)
+    //   .then(
+    //     res => resolve(res),
+    //     err => reject(err)
+    //   )
+    // })
+
     return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser;
-      this.firestore.collection('user').doc(currentUser.uid).collection('details').doc(currentUser.uid).set(info)
-      .then(
-        res => resolve(res),
-        err => reject(err)
-      )
+      let users = this.firestore.collection('user');
+     
     })
-
   }
 
   get_flatmte_preference(value)

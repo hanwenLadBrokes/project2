@@ -18,7 +18,14 @@ export class ProfilePage implements OnInit {
     age:'',
     gender:'',
     habit:''
-  }
+  };
+
+  localProfile : Info = {
+    name: '',
+    age:'',
+    gender:'',
+    habit:''
+  };
   
 
   constructor(
@@ -33,16 +40,17 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     this.dataservice.show_details().subscribe(infos =>{
       this.infos = infos;
+      this.localProfile = this.infos[0];
     });
+    this.dataservice.get_user_details(null);
     
   }
 
   
   update(){
- 
-      this.dataservice.update_details(this.inf);
-
+      this.dataservice.update_details(this.localProfile);
   }
+
   BacktoHome(){
     this.router.navigateByUrl('home');
   }

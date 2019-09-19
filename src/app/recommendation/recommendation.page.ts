@@ -14,6 +14,9 @@ export class RecommendationPage implements OnInit {
   arrayOfItems:any [] = [];
   myProflie:any;
   matchingResult:any;
+  idealMate : any;
+  idealGender : any;
+  idealHabit : any;
 
   constructor(private navCtrl: NavController,
     public router: Router,
@@ -21,8 +24,14 @@ export class RecommendationPage implements OnInit {
 
   ngOnInit(){
     
+    if( localStorage.getItem("idealMate" ) ){
+      this.idealMate = localStorage.getItem( "idealMate" );
+      this.idealMate = localStorage.getItem("idealAge");
+      this.idealGender = localStorage.getItem("idealGender");
+      this.idealHabit = localStorage.getItem("idealHabit");
 
-
+      
+    }
     var xiaohong:any = new Object();
     xiaohong.name = "xiaohong";
     xiaohong.dob = "01/01/1981";
@@ -86,6 +95,8 @@ export class RecommendationPage implements OnInit {
     this.navCtrl.navigateForward('/comparasion-detail');
 
   }
+
+  
 
   
   matchingCalculator(){
