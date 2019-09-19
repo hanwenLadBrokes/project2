@@ -4,10 +4,8 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { AngularFireAuth } from '@angular/fire/auth';
 import {Info} from '../models/info';
 import { Observable } from 'rxjs';
-import { IonItemDivider } from '@ionic/angular';
 import { Item } from '../models/item';
 import {map} from 'rxjs/operators'
-import { resolve, reject } from 'q';
  
 @Injectable({
   providedIn: 'root'
@@ -20,6 +18,8 @@ export class DatabaseService {
   Flatmate_detail: AngularFirestoreCollection<Item>;
   Flatmate_details: Observable<Item[]>;
   FlatmateDoc: AngularFirestoreDocument<Item>;
+
+  profileDetails: Observable<any[]>;
  
   constructor(
     private firestore: AngularFirestore,
@@ -27,6 +27,7 @@ export class DatabaseService {
   ){
     let currentUser = firebase.auth().currentUser;
     this.Profile_detail = firestore.collection('user').doc(currentUser.uid).collection('details');
+    this.profileDetails = firestore.collection('user').valueChanges();
   }
 
   addUserProfile( info:Info ){
@@ -41,11 +42,8 @@ export class DatabaseService {
     })
   }
 
-  async getUserCollection(){
-
-    let userRef = this.firestore.collection('user');
-    let allCities = await userRef.get();
-    let a = 1;
+  getUserCollection(){
+    return this.profileDetails;
   }
 
 

@@ -23,7 +23,9 @@ export class RecommendationPage implements OnInit {
 
   ngOnInit(){
     
-    this.databaseService.getUserCollection();
+    this.databaseService.getUserCollection().then(snapshot => {
+        console.log( snapshot );
+    });
 
     var xiaohong:any = new Object();
     xiaohong.name = "xiaohong";
