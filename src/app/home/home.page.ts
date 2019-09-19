@@ -28,6 +28,10 @@ export class HomePage {
   gotoFlatmatepreference(){
     this.router.navigateByUrl("flatmate-preference")
   }
+  recommendationList(){
+    this.router.navigateByUrl("recommendation")
+  }
+
   logout(){
     this.authService.logoutUser()
     .then(res => {

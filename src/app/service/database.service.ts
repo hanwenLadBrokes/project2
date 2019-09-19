@@ -72,7 +72,7 @@ export class DatabaseService {
   show_flatmates(){
     let currentUser = firebase.auth().currentUser;
     this.Flatmate_details =  this.firestore.collection('flatmate').doc(currentUser.uid).collection('preference').valueChanges();
-    return this.Flatmate_details; 
+    return this.Flatmate_details;
   }
 
   update_details(info:Info){

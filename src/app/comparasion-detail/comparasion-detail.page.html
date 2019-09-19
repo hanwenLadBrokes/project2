@@ -1,9 +1,116 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>comparasionDetail</ion-title>
+    <ion-title>details</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <div>
+        Item
+      </div>
+    </ion-col>
+    <ion-col >
+      <div>
+        My Profile
+      </div>
+    </ion-col>
+    <ion-col>
+      <div>
+        Mate Profile
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <div>
+       Name
+      </div>
+    </ion-col>
+    <ion-col >
+      <div>
+        {{myProfile.name}}
+      </div>
+    </ion-col>
+    <ion-col>
+      <div>
+        {{mateProfile.name}}
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-col>
+        <div>
+         DOB
+        </div>
+      </ion-col>
+      <ion-col >
+        <div>
+          {{myProfile.dob}}
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          {{mateProfile.dob}}
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+          <div>
+           Gender
+          </div>
+        </ion-col>
+        <ion-col >
+          <div>
+            {{myProfile.gender}}
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            {{mateProfile.gender}}
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col>
+            <div>
+             Like swmming
+            </div>
+          </ion-col>
+          <ion-col >
+            <div>
+              {{myProfile.swmming}}
+            </div>
+          </ion-col>
+          <ion-col>
+            <div>
+              {{mateProfile.swmming}}
+            </div>
+          </ion-col>
+        </ion-row><ion-row>
+            <ion-col>
+              <div>
+               Like Basktball
+              </div>
+            </ion-col>
+            <ion-col >
+              <div>
+                {{myProfile.baskball}}
+              </div>
+            </ion-col>
+            <ion-col>
+              <div>
+                {{mateProfile.baskball}}
+              </div>
+            </ion-col>
+          </ion-row>
+
+</ion-grid>
+
+
+<ion-button (click)="recommendationList()">Go Back Recommendation List</ion-button>
 
 </ion-content>
