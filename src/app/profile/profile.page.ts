@@ -37,11 +37,11 @@ export class ProfilePage implements OnInit {
     
   }
 
-
+  
   update(){
-    if(this.inf.name != ''&& this.inf.age != '' && this.inf.gender != '' && this.inf.habit != ''){
+ 
       this.dataservice.update_details(this.inf);
-    }
+
   }
   BacktoHome(){
     this.router.navigateByUrl('home');
