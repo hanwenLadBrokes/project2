@@ -43,7 +43,8 @@ export class DatabaseService {
   }
 
   getUserCollection(){
-    return await this.profileDetails;
+    let currentUser = firebase.auth().currentUser;
+    return this.firestore.collection('user').valueChanges();;
   }
 
 

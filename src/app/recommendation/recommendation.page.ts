@@ -23,8 +23,8 @@ export class RecommendationPage implements OnInit {
 
   ngOnInit(){
     
-    this.databaseService.getUserCollection().then(snapshot => {
-        console.log( snapshot );
+    this.databaseService.getUserCollection().subscribe(items =>{
+      this.arrayOfItems = items;
     });
 
     var xiaohong:any = new Object();
