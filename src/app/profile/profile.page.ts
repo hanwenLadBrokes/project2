@@ -4,7 +4,6 @@ import { DatabaseService } from '../service/database.service';
 import { AuthenticateService } from '../service/authentication.service';
 import { LoadingController, NavController } from '@ionic/angular';
 import { Info } from '../models/info';
-import { Item } from '../models/item';
 
 @Component({
   selector: 'app-profile',
@@ -14,6 +13,12 @@ import { Item } from '../models/item';
 export class ProfilePage implements OnInit {
 
   infos: Info[];
+  inf:Info={
+    name: '',
+    age:'',
+    gender:'',
+    habit:''
+  }
   
 
   constructor(
@@ -33,9 +38,10 @@ export class ProfilePage implements OnInit {
   }
 
 
-  update(info:Info){
-    this.dataservice.update_details(info);
-    
+  update(){
+    if(this.inf.name != ''&& this.inf.age != '' && this.inf.gender != '' && this.inf.habit != ''){
+      this.dataservice.update_details(this.inf);
+    }
   }
   BacktoHome(){
     this.router.navigateByUrl('home');

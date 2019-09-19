@@ -6,6 +6,7 @@ import {Info} from '../models/info';
 import { Observable } from 'rxjs';
 import { IonItemDivider } from '@ionic/angular';
 import { Item } from '../models/item';
+import {map} from 'rxjs/operators'
 
  
 @Injectable({
@@ -24,18 +25,14 @@ export class DatabaseService {
     private firestore: AngularFirestore,
     public afAuth: AngularFireAuth
   ){
-    
+    let currentUser = firebase.auth().currentUser;
+    this.Profile_detail = firestore.collection('user').doc(currentUser.uid).collection('details');
   }
-  get_user_details(value)
+  get_user_details(info:Info)
   {
     return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser;
-      this.firestore.collection('user').doc(currentUser.uid).collection('details').doc(currentUser.uid).set({
-        name: value.name,
-        age: value.age,
-        gender: value.gender,
-        habit: value.habit
-      })
+      this.firestore.collection('user').doc(currentUser.uid).collection('details').doc(currentUser.uid).set(info)
       .then(
         res => resolve(res),
         err => reject(err)
@@ -62,8 +59,14 @@ export class DatabaseService {
   }
 
   show_details(){
-    let currentUser = firebase.auth().currentUser;
-    this.Profile_details =  this.firestore.collection('user').doc(currentUser.uid).collection('details').valueChanges();
+    
+    this.Profile_details =  this.Profile_detail.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Info;
+        const id = a.payload.doc.id;
+        return {id, ...data};
+      }))
+    );
     return this.Profile_details; 
   }
 
@@ -76,7 +79,7 @@ export class DatabaseService {
   update_details(info:Info){
     
     let currentUser = firebase.auth().currentUser;
-    this.profileDoc = this.firestore.collection('user').doc(currentUser.uid).collection('details').doc(currentUser.uid);
+    this.profileDoc = this.Profile_detail.doc(currentUser.uid);
     this.profileDoc.update(info);
     
   }

@@ -5,53 +5,13 @@
 </ion-header>
 
 <ion-content padding>
-  <form class="form" [formGroup]="validations_form"  (ngSubmit)="get_input(validations_form.value)">
-    <ion-item>
-        <ion-label  position="floating" color="primary">Name</ion-label>
-        <ion-input type="text" formControlName="name"></ion-input>
-    </ion-item>
-    <div class="validation-errors">
-      <ng-container *ngFor="let validation of validation_messages.name">
-        <div class="error-message" *ngIf="validations_form.get('name').hasError(validation.type) && (validations_form.get('name').dirty || validations_form.get('name').touched)">
-          {{ validation.message }}
-        </div>
-      </ng-container>
-    </div>
-    <ion-item>
-      <ion-label position="floating" color="primary">Age</ion-label>
-      <ion-input type="text" formControlName="age"></ion-input>
-    </ion-item>
-    <div class="validation-errors">
-      <ng-container *ngFor="let validation of validation_messages.age">
-        <div class="error-message" *ngIf="validations_form.get('age').hasError(validation.type) && (validations_form.get('age').dirty || validations_form.get('age').touched)">
-          {{ validation.message }}
-        </div>
-      </ng-container>
-    </div>
-    <ion-item>
-      <ion-label position="floating" color="primary">Gender</ion-label>
-      <ion-input type="text" formControlName="gender"></ion-input>
-    </ion-item>
-    <div class="validation-errors">
-      <ng-container *ngFor="let validation of validation_messages.gender">
-        <div class="error-message" *ngIf="validations_form.get('gender').hasError(validation.type) && (validations_form.get('gender').dirty || validations_form.get('gender').touched)">
-          {{ validation.message }}
-        </div>
-      </ng-container>
-    </div>
-    <ion-item>
-      <ion-label position="floating" color="primary">Habit</ion-label>
-      <ion-input type="text" formControlName="habit"></ion-input>
-    </ion-item>
-    <div class="validation-errors">
-      <ng-container *ngFor="let validation of validation_messages.habit">
-        <div class="error-message" *ngIf="validations_form.get('habit').hasError(validation.type) && (validations_form.get('habit').dirty || validations_form.get('habit').touched)">
-          {{ validation.message }}
-        </div>
-      </ng-container>
-    </div>
-    <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!validations_form.valid">Submit</ion-button>   
-  </form>
+  <div class="row">
+    Name: <ion-input [(ngModel)]="info.name" name="name"></ion-input><br>
+    Age: <ion-input [(ngModel)]="info.age" name="age"></ion-input><br>
+    Gender: <ion-input [(ngModel)]="info.gender" name="gender"></ion-input><br>
+    Habit: <ion-input [(ngModel)]="info.habit" name="habit"></ion-input>
+  </div>
+  <ion-button (click)="submitProfile()">Submit</ion-button>
   <ion-button (click)="logout()">Logout</ion-button>
 
 </ion-content>
