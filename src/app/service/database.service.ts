@@ -27,6 +27,13 @@ export class DatabaseService {
   ){
     let currentUser = firebase.auth().currentUser;
     this.Profile_detail = firestore.collection('user').doc(currentUser.uid).collection('details');
+    this.Profile_details =  this.Profile_detail.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Info;
+        const id = a.payload.doc.id;
+        return {id, ...data};
+      }))
+    );
   }
   get_user_details(info:Info)
   {
@@ -58,15 +65,7 @@ export class DatabaseService {
 
   }
 
-  show_details(){
-    
-    this.Profile_details =  this.Profile_detail.snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Info;
-        const id = a.payload.doc.id;
-        return {id, ...data};
-      }))
-    );
+  show_details():Observable<Info[]> {
     return this.Profile_details; 
   }
 
@@ -83,6 +82,6 @@ export class DatabaseService {
     this.profileDoc.update(info);
     
   }
-  
+
   
 }

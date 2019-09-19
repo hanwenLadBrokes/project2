@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-title color="primary">profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,10 +9,10 @@
     <h1>Your information</h1>
     <ul *ngFor = "let info of infos">
       <div class="row">
-          Name: <ion-input [(ngModel)]="info.name" [(ngModel)]="inf.name" name="name"></ion-input><br>
-          Age: <ion-input [(ngModel)]="info.age" [(ngModel)]="inf.age" name="age"></ion-input><br>
-          Gender: <ion-input [(ngModel)]="info.gender" [(ngModel)]="inf.gender" name="gender"></ion-input><br>
-          Habit: <ion-input [(ngModel)]="info.habit" [(ngModel)]="inf.habit" name="habit"></ion-input>
+          Name: <ion-input type = "text" [(ngModel)]="info.name" [(ngModel)]="inf.name" name="name"></ion-input><br>
+          Age: <ion-input type = "text" [(ngModel)]="info.age" [(ngModel)]="inf.age" name="age"></ion-input><br>
+          Gender: <ion-input type = "text" [(ngModel)]="info.gender" [(ngModel)]="inf.gender" name="gender"></ion-input><br>
+          Habit: <ion-input type = "text" [(ngModel)]="info.habit" [(ngModel)]="inf.habit" name="habit"></ion-input>
       </div>
     </ul>
   </div>
