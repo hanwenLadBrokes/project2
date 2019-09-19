@@ -12,26 +12,8 @@ import { Item } from '../models/item';
   styleUrls: ['./flatmate-preference.page.scss'],
 })
 export class FlatmatePreferencePage implements OnInit {
-  validations_form: FormGroup;
-  errorMessage: string = '';
-  successMessage: string = '';
   items: Item[];
   idealMate : any;
-
-  validation_messages = {
-    'age': [
-      { type: 'required', message: 'Age is required.' },
-      { type: 'minlength', message: 'Age must be at least 1 characters long.' }
-    ],
-    'gender': [
-      { type: 'required', message: 'Gender is required.' },
-      { type: 'minlength', message: 'Gender must be at least 1 characters long.' }
-    ],
-    'habit': [
-      { type: 'required', message: 'Habit is required.' },
-      { type: 'minlength', message: 'Habit must be at least 1 characters long.' }
-    ]
-  };
 
   constructor(
     private navCtrl: NavController,
@@ -42,46 +24,22 @@ export class FlatmatePreferencePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.resetFields();
     this.dataService.show_flatmates().subscribe(items =>{
       this.items = items;
+      this.idealMate= this.items[0];
     });
 
     this.idealMate = new Object();
 
-    this.idealMate.age = 30;
-    this.idealMate.gender = "Male";
-    this.idealMate.habit = "Swimming";
-  }
-  resetFields(){
-    this.validations_form = this.formBuilder.group({
-      age: new FormControl('', Validators.compose([
-        Validators.minLength(1),
-        Validators.required
-      ])),
-      gender: new FormControl('', Validators.compose([
-        Validators.minLength(1),
-        Validators.required
-      ])),
-      habit: new FormControl('', Validators.compose([
-        Validators.minLength(1),
-        Validators.required
-      ])),
-    });
-  }
-  get_input(value){
-    let data = {
-      age: value.age,
-      gender: value.gender,
-      habit: value.habit
-    }
-    this.dataService.get_flatmte_preference(data)
-     .then(res => {
-      this.router.navigateByUrl('flatmate-preference');
-     })
+    this.idealMate.age = '';
+    this.idealMate.gender = '';
+    this.idealMate.habit = '';
   }
 
+  
+
   update(){
+    this.dataService.update_flatmates(this.idealMate);
     localStorage.setItem("idealMate",this.idealMate);
     localStorage.setItem("idealAge",this.idealMate.age);
     localStorage.setItem("idealGender",this.idealMate.gender);
