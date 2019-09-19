@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content padding>
-  <div *ngIf="infos?.length > 0 else noinfos">
+  <!-- <div *ngIf="infos?.length > 0 else noinfos">
     <h1>Your information</h1>
     <ul *ngFor = "let info of infos">
       <div class="row">
@@ -15,10 +15,17 @@
           Habit: <ion-input [(ngModel)]="info.habit" [(ngModel)]="inf.habit" name="habit"></ion-input>
       </div>
     </ul>
-  </div>
+  </div> -->
 
   
-    
+    <div class="row">
+        Name: <ion-input [(ngModel)]="localProfile.name" name="name"></ion-input><br>
+        Age: <ion-input [(ngModel)]="localProfile.age" name="age"></ion-input><br>
+        Gender: <ion-input [(ngModel)]="localProfile.gender" name="gender"></ion-input><br>
+        Habit: <ion-input [(ngModel)]="localProfile.habit" name="habit"></ion-input>
+    </div>
+ 
+
     
     
     <ng-template #noinfos>
