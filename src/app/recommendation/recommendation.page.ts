@@ -25,8 +25,12 @@ export class RecommendationPage implements OnInit {
     
     this.databaseService.getUserCollection().subscribe(items =>{
       this.arrayOfItems = items;
+      // 拿回来数据就做计算
+      this.matchingCalculator();
     });
 
+    // 以下的都不要，因为你已经从 this.databaseService.getUserCollection() 把数据拿回来了
+    /*
     var xiaohong:any = new Object();
     xiaohong.name = "xiaohong";
     xiaohong.dob = "01/01/1981";
@@ -73,7 +77,7 @@ export class RecommendationPage implements OnInit {
     this.myProflie = zhangsan;
 
     this.matchingCalculator();
-
+    */
   }
 
   onUpdateProfile(){
@@ -97,19 +101,33 @@ export class RecommendationPage implements OnInit {
     var myProflie =  this.myProflie;
     var mateProfile;
     
-    
-    for(var i: number = 0; i < this.arrayOfItems.length; i++){
+    // 如果没有设定理想的同屋，那么久初始化result为0
+    if( !localStorage.get("idealMate") ){
+      for(var i: number = 0; i < this.arrayOfItems.length; i++){
+        this.arrayOfItems[i].result = 0;
+      }
+    }else{
+      
+      let idealAge = localStorage.get("idealAge");
+      let idealGender = localStorage.get("idealGender");
+      let idealHabit = localStorage.get("idealHabit");
+      
+      for(var i: number = 0; i < this.arrayOfItems.length; i++){
     
         mateProfile = this.arrayOfItems[i];
         var num = 0;
-        var totalHobby = 2;
+        var totalHobby = 3;
         var result;
 
-        if ( myProflie.swmming === mateProfile.swmming ){
+        if ( idealAge === mateProfile.age ){
           num += 1;
         }
 
-        if (myProflie.baskball === mateProfile.baskball){
+        if (idealGender === mateProfile.gender){
+          num += 1;
+        }
+        
+        if( idealHabit === mateProfile.habit ){
           num += 1;
         }
 
@@ -119,5 +137,6 @@ export class RecommendationPage implements OnInit {
 
     }
 
+    }
   }
 }
